@@ -10,7 +10,7 @@ func TokenizeString(str string) ([]*Token, error) {
 }
 
 var (
-	ErrEOF = errors.New("lex end of source")
+	ErrLexEOF = errors.New("lex end of source")
 )
 
 type Lexer struct {
@@ -20,7 +20,7 @@ type Lexer struct {
 
 func (lex *Lexer) peek() (byte, error) {
 	if lex.pos >= len(lex.str) {
-		return 0, ErrEOF
+		return 0, ErrLexEOF
 	}
 	return lex.str[lex.pos], nil
 }
@@ -36,7 +36,7 @@ func (lex *Lexer) tokenize() ([]*Token, error) {
 
 		token, err := lex.lexToken()
 		if err != nil {
-			if err == ErrEOF {
+			if err == ErrLexEOF {
 				break
 			}
 			return nil, err
@@ -70,21 +70,21 @@ func (lex *Lexer) lexToken() (*Token, error) {
 	case isAlpha(c):
 		return lex.lexIdentifier(c), nil
 	case c == '=':
-		return NewToken(Assign, c), nil
+		return NewToken(TokenAssign, c), nil
 	case c == '+':
-		return NewToken(Plus, c), nil
+		return NewToken(TokenPlus, c), nil
 	case c == '-':
-		return NewToken(Minus, c), nil
+		return NewToken(TokenMinus, c), nil
 	case c == '*':
-		return NewToken(Star, c), nil
+		return NewToken(TokenStar, c), nil
 	case c == '/':
-		return NewToken(Slash, c), nil
+		return NewToken(TokenSlash, c), nil
 	case c == ';':
-		return NewToken(SemiColon, c), nil
+		return NewToken(TokenSemiColon, c), nil
 	case c == '(':
-		return NewToken(LeftParen, c), nil
+		return NewToken(TokenLeftParen, c), nil
 	case c == ')':
-		return NewToken(RightParen, c), nil
+		return NewToken(TokenRightParen, c), nil
 	case isDigit(c):
 		return lex.lexDigital(c), nil
 	default:
@@ -93,11 +93,11 @@ func (lex *Lexer) lexToken() (*Token, error) {
 }
 
 var keywords = map[string]TokenType{
-	"int": Int,
+	"int": TokenInt,
 }
 
 func (lex *Lexer) lexIdentifier(c byte) *Token {
-	token := NewToken(Identifier, c)
+	token := NewToken(TokenIdentifier, c)
 	for {
 		c, err := lex.peek()
 		if err != nil {
@@ -116,7 +116,7 @@ func (lex *Lexer) lexIdentifier(c byte) *Token {
 }
 
 func (lex *Lexer) lexDigital(c byte) *Token {
-	token := NewToken(IntLiteral, c)
+	token := NewToken(TokenIntLiteral, c)
 	for {
 		c, err := lex.peek()
 		if err != nil {

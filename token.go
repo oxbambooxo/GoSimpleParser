@@ -20,7 +20,7 @@ func (token *Token) Value() string {
 }
 
 func (token *Token) String() string {
-	if token.Type == Identifier || token.Type == IntLiteral {
+	if token.Type == TokenIdentifier || token.Type == TokenIntLiteral {
 		return fmt.Sprintf("Token{%v: %s}", token.Type, string(token.buf))
 	}
 	return fmt.Sprintf("Token{%v}", token.Type)
@@ -29,42 +29,42 @@ func (token *Token) String() string {
 type TokenType int
 
 const (
-	Plus       TokenType = iota // +
-	Minus                       // -
-	Star                        // *
-	Slash                       // /
-	SemiColon                   // ;
-	LeftParen                   // (
-	RightParen                  // )
-	Assign                      // =
-	Int                         // int
-	Identifier                  // 标识符
-	IntLiteral                  // 整型字面量
+	TokenPlus       TokenType = iota // +
+	TokenMinus                       // -
+	TokenStar                        // *
+	TokenSlash                       // /
+	TokenSemiColon                   // ;
+	TokenLeftParen                   // (
+	TokenRightParen                  // )
+	TokenAssign                      // =
+	TokenInt                         // int
+	TokenIdentifier                  // 标识符
+	TokenIntLiteral                  // 整型字面量
 )
 
 func (t TokenType) String() string {
 	switch t {
-	case Plus:
+	case TokenPlus:
 		return "Plus"
-	case Minus:
+	case TokenMinus:
 		return "Minus"
-	case Star:
+	case TokenStar:
 		return "Star"
-	case Slash:
+	case TokenSlash:
 		return "Slash"
-	case SemiColon:
+	case TokenSemiColon:
 		return "SemiColon"
-	case LeftParen:
+	case TokenLeftParen:
 		return "LeftParen"
-	case RightParen:
+	case TokenRightParen:
 		return "RightParen"
-	case Assign:
+	case TokenAssign:
 		return "Assign"
-	case Int:
+	case TokenInt:
 		return "Int"
-	case Identifier:
+	case TokenIdentifier:
 		return "Identifier"
-	case IntLiteral:
+	case TokenIntLiteral:
 		return "IntLiteral"
 	default:
 		return "unknown token type"
