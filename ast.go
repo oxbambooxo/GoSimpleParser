@@ -15,6 +15,7 @@ type ASTNode struct {
 }
 
 func (node *ASTNode) AddChild(child *ASTNode) {
+	child.parent = node
 	node.childrens = append(node.childrens, child)
 }
 
