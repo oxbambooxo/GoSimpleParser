@@ -7,13 +7,13 @@ import (
 
 /*
 
- * programm -> intDeclare | assignmentStatement | expressionStatement
- * intDeclare -> 'int' Id ( = additive) (';')
- * assignmentStatement -> Id '=' addtive (';')
- * expressionStatement -> addtive (';')
+ * programm -> intdeclare | assignment | expression
+ * intdeclare -> 'int' identifier ( = additive) (';')
+ * assignment -> identifier '=' addtive (';')
+ * expression -> addtive (';')
  * additive -> multiplicative ( (+ | -) multiplicative)*
  * multiplicative -> primary ( (* | /) primary)*
- * primary -> IntLiteral | Id | (additive)
+ * primary -> intliteral | identifier | (additive)
 
  */
 
@@ -89,10 +89,10 @@ func (parser *Parser) parse() (*ASTNode, error) {
 		}
 		child := parser.parseIntDeclare()
 		if child == nil {
-			child = parser.assignmentStatement()
+			child = parser.parseAssignment()
 		}
 		if child == nil {
-			child = parser.expressionStatement()
+			child = parser.parseExpression()
 		}
 		if child == nil {
 			if token.Type == TokenSemiColon {
@@ -220,7 +220,7 @@ func (parser *Parser) parsePrimary() (node *ASTNode) {
 	return
 }
 
-func (parser *Parser) expressionStatement() (node *ASTNode) {
+func (parser *Parser) parseExpression() (node *ASTNode) {
 	// 语句没有强制的 ; 分隔符, 不需要回退, 子语句解析失败不消耗 token
 	// pos := parser.tokenPosition()
 	exp := parser.parseAdditive()
@@ -234,7 +234,7 @@ func (parser *Parser) expressionStatement() (node *ASTNode) {
 	return
 }
 
-func (parser *Parser) assignmentStatement() (node *ASTNode) {
+func (parser *Parser) parseAssignment() (node *ASTNode) {
 	pos := parser.tokenPosition()
 	token, err := parser.tokenPeek() //预读，看看下面是不是标识符
 	if err != nil || token.Type != TokenIdentifier {
