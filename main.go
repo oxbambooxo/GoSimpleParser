@@ -20,16 +20,28 @@ func main() {
 		if input == "exit;" {
 			break
 		}
+		// 调试 lexer
 		// tokens, err := TokenizeString(input)
 		// if err != nil {
-		// 	panic(err)
+		// 	fmt.Println(err)
+		// } else {
+		// 	fmt.Println("tokens", tokens)
 		// }
-		// fmt.Println("tokens", tokens)
 
-		node, err := ParserString(input)
+		// 调试 parser
+		// node, err := ParserString(input)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// } else {
+		// 	PrintAST(node)
+		// }
+
+		// 调试 eval
+		value, err := EvalString(input)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
+		} else {
+			fmt.Println(value)
 		}
-		PrintAST(node)
 	}
 }

@@ -38,12 +38,12 @@ func printAST(prefix string, node *ASTNode) {
 		fmt.Printf("unknown ast node\n")
 		return
 	}
-	if node.value == "" {
+	if node.Value == "" {
 		fmt.Printf("%sType: %v\n", prefix, node.NodeType)
 	} else {
-		fmt.Printf("%sType: %v Value: %s\n", prefix, node.NodeType, node.value)
+		fmt.Printf("%sType: %v Value: %s\n", prefix, node.NodeType, node.Value)
 	}
-	for _, child := range node.childrens {
+	for _, child := range node.Childrens {
 		printAST(prefix+"\t", child)
 	}
 }
@@ -77,8 +77,16 @@ func (parser *Parser) tokenSeek(pos int) {
 	parser.pos = pos
 }
 
-func (parser *Parser) parse() (*ASTNode, error) {
-	root := NewASTNode(NodeProgram, "")
+func (parser *Parser) parse() (root *ASTNode, err error) {
+	defer func() {
+		rerr := recover()
+		if rerr != nil {
+			err = fmt.Errorf("%v", rerr)
+			return
+		}
+	}()
+
+	root = NewASTNode(NodeProgram, "")
 	for {
 		token, err := parser.tokenPeek()
 		if err != nil {
@@ -99,7 +107,6 @@ func (parser *Parser) parse() (*ASTNode, error) {
 				parser.tokenNext()
 				continue
 			}
-			fmt.Printf("unknown statement: %v\n", token)
 			return nil, ErrUnknownStatment
 		}
 		root.AddChild(child)
@@ -229,7 +236,7 @@ func (parser *Parser) parseExpression() (node *ASTNode) {
 	}
 	parser.parseOptionalSemiColon()
 
-	node = NewASTNode(NodeExpressionStmt, "")
+	node = NewASTNode(NodeExpression, "")
 	node.AddChild(exp)
 	return
 }
@@ -242,7 +249,7 @@ func (parser *Parser) parseAssignment() (node *ASTNode) {
 	}
 	parser.tokenNext()
 
-	node = NewASTNode(NodeAssignmentStmt, token.Value())
+	node = NewASTNode(NodeAssignment, token.Value())
 
 	token, err = parser.tokenPeek() //预读，看看下面是不是标识符
 	if err != nil || token.Type != TokenAssign {
