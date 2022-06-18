@@ -7,10 +7,10 @@ import (
 
 /*
 
- * programm -> intdeclare | assignment | expression
- * intdeclare -> 'int' identifier ( = additive) (';')
- * assignment -> identifier '=' addtive (';')
- * expression -> addtive (';')
+ * programm -> (intdeclare | assignment | expression)+
+ * intdeclare -> 'int' identifier ( = additive) (';')?
+ * assignment -> identifier '=' addtive (';')?
+ * expression -> addtive (';')?
  * additive -> multiplicative ( (+ | -) multiplicative)*
  * multiplicative -> primary ( (* | /) primary)*
  * primary -> intliteral | identifier | (additive)
