@@ -33,49 +33,59 @@ var simplescriptParserStaticData struct {
 func simplescriptParserInit() {
 	staticData := &simplescriptParserStaticData
 	staticData.literalNames = []string{
-		"", "'int'", "", "'='", "'+'", "'-'", "'*'", "'/'", "';'", "'('", "')'",
+		"", "'int'", "", "'='", "'+'", "'-'", "'*'", "'/'", "','", "';'", "'('",
+		"')'",
 	}
 	staticData.symbolicNames = []string{
 		"", "Int", "IntegerLiteral", "AssignmentOP", "Plus", "Minus", "Star",
-		"Slash", "SemiColon", "LeftParen", "RightParen", "Identifier", "Whitespace",
-		"Newline",
+		"Slash", "Comma", "SemiColon", "LeftParen", "RightParen", "Identifier",
+		"Whitespace", "Newline",
 	}
 	staticData.ruleNames = []string{
 		"programm", "statement", "intDeclaration", "assignment", "expression",
-		"additive", "multiplicative", "primary",
+		"additive", "multiplicative", "primary", "functionCall", "expressionList",
 	}
 	staticData.predictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 13, 74, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
-		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 1, 0, 1, 0, 1, 0, 1, 0, 4, 0, 21,
-		8, 0, 11, 0, 12, 0, 22, 3, 0, 25, 8, 0, 1, 1, 1, 1, 1, 1, 3, 1, 30, 8,
-		1, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 36, 8, 2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 4,
-		1, 4, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 5, 5, 50, 8, 5, 10, 5, 12, 5,
-		53, 9, 5, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 5, 6, 61, 8, 6, 10, 6, 12,
-		6, 64, 9, 6, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 3, 7, 72, 8, 7, 1, 7,
-		0, 2, 10, 12, 8, 0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 1, 0, 4, 5, 1, 0, 6,
-		7, 74, 0, 24, 1, 0, 0, 0, 2, 29, 1, 0, 0, 0, 4, 31, 1, 0, 0, 0, 6, 37,
-		1, 0, 0, 0, 8, 41, 1, 0, 0, 0, 10, 43, 1, 0, 0, 0, 12, 54, 1, 0, 0, 0,
-		14, 71, 1, 0, 0, 0, 16, 25, 3, 2, 1, 0, 17, 18, 3, 2, 1, 0, 18, 19, 5,
-		8, 0, 0, 19, 21, 1, 0, 0, 0, 20, 17, 1, 0, 0, 0, 21, 22, 1, 0, 0, 0, 22,
-		20, 1, 0, 0, 0, 22, 23, 1, 0, 0, 0, 23, 25, 1, 0, 0, 0, 24, 16, 1, 0, 0,
-		0, 24, 20, 1, 0, 0, 0, 25, 1, 1, 0, 0, 0, 26, 30, 3, 4, 2, 0, 27, 30, 3,
-		6, 3, 0, 28, 30, 3, 8, 4, 0, 29, 26, 1, 0, 0, 0, 29, 27, 1, 0, 0, 0, 29,
-		28, 1, 0, 0, 0, 30, 3, 1, 0, 0, 0, 31, 32, 5, 1, 0, 0, 32, 35, 5, 11, 0,
-		0, 33, 34, 5, 3, 0, 0, 34, 36, 3, 10, 5, 0, 35, 33, 1, 0, 0, 0, 35, 36,
-		1, 0, 0, 0, 36, 5, 1, 0, 0, 0, 37, 38, 5, 11, 0, 0, 38, 39, 5, 3, 0, 0,
-		39, 40, 3, 10, 5, 0, 40, 7, 1, 0, 0, 0, 41, 42, 3, 10, 5, 0, 42, 9, 1,
-		0, 0, 0, 43, 44, 6, 5, -1, 0, 44, 45, 3, 12, 6, 0, 45, 51, 1, 0, 0, 0,
-		46, 47, 10, 1, 0, 0, 47, 48, 7, 0, 0, 0, 48, 50, 3, 12, 6, 0, 49, 46, 1,
-		0, 0, 0, 50, 53, 1, 0, 0, 0, 51, 49, 1, 0, 0, 0, 51, 52, 1, 0, 0, 0, 52,
-		11, 1, 0, 0, 0, 53, 51, 1, 0, 0, 0, 54, 55, 6, 6, -1, 0, 55, 56, 3, 14,
-		7, 0, 56, 62, 1, 0, 0, 0, 57, 58, 10, 1, 0, 0, 58, 59, 7, 1, 0, 0, 59,
-		61, 3, 14, 7, 0, 60, 57, 1, 0, 0, 0, 61, 64, 1, 0, 0, 0, 62, 60, 1, 0,
-		0, 0, 62, 63, 1, 0, 0, 0, 63, 13, 1, 0, 0, 0, 64, 62, 1, 0, 0, 0, 65, 72,
-		5, 2, 0, 0, 66, 72, 5, 11, 0, 0, 67, 68, 5, 9, 0, 0, 68, 69, 3, 8, 4, 0,
-		69, 70, 5, 10, 0, 0, 70, 72, 1, 0, 0, 0, 71, 65, 1, 0, 0, 0, 71, 66, 1,
-		0, 0, 0, 71, 67, 1, 0, 0, 0, 72, 15, 1, 0, 0, 0, 7, 22, 24, 29, 35, 51,
-		62, 71,
+		4, 1, 14, 97, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 1, 0, 1,
+		0, 1, 0, 1, 0, 4, 0, 25, 8, 0, 11, 0, 12, 0, 26, 3, 0, 29, 8, 0, 1, 1,
+		1, 1, 1, 1, 3, 1, 34, 8, 1, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 40, 8, 2, 1,
+		3, 1, 3, 1, 3, 1, 3, 1, 4, 1, 4, 3, 4, 48, 8, 4, 1, 5, 1, 5, 1, 5, 1, 5,
+		1, 5, 1, 5, 5, 5, 56, 8, 5, 10, 5, 12, 5, 59, 9, 5, 1, 6, 1, 6, 1, 6, 1,
+		6, 1, 6, 1, 6, 5, 6, 67, 8, 6, 10, 6, 12, 6, 70, 9, 6, 1, 7, 1, 7, 1, 7,
+		1, 7, 1, 7, 1, 7, 3, 7, 78, 8, 7, 1, 8, 1, 8, 1, 8, 3, 8, 83, 8, 8, 1,
+		8, 1, 8, 1, 9, 1, 9, 1, 9, 1, 9, 4, 9, 91, 8, 9, 11, 9, 12, 9, 92, 3, 9,
+		95, 8, 9, 1, 9, 0, 2, 10, 12, 10, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 0,
+		2, 1, 0, 4, 5, 1, 0, 6, 7, 99, 0, 28, 1, 0, 0, 0, 2, 33, 1, 0, 0, 0, 4,
+		35, 1, 0, 0, 0, 6, 41, 1, 0, 0, 0, 8, 47, 1, 0, 0, 0, 10, 49, 1, 0, 0,
+		0, 12, 60, 1, 0, 0, 0, 14, 77, 1, 0, 0, 0, 16, 79, 1, 0, 0, 0, 18, 94,
+		1, 0, 0, 0, 20, 29, 3, 2, 1, 0, 21, 22, 3, 2, 1, 0, 22, 23, 5, 9, 0, 0,
+		23, 25, 1, 0, 0, 0, 24, 21, 1, 0, 0, 0, 25, 26, 1, 0, 0, 0, 26, 24, 1,
+		0, 0, 0, 26, 27, 1, 0, 0, 0, 27, 29, 1, 0, 0, 0, 28, 20, 1, 0, 0, 0, 28,
+		24, 1, 0, 0, 0, 29, 1, 1, 0, 0, 0, 30, 34, 3, 4, 2, 0, 31, 34, 3, 6, 3,
+		0, 32, 34, 3, 8, 4, 0, 33, 30, 1, 0, 0, 0, 33, 31, 1, 0, 0, 0, 33, 32,
+		1, 0, 0, 0, 34, 3, 1, 0, 0, 0, 35, 36, 5, 1, 0, 0, 36, 39, 5, 12, 0, 0,
+		37, 38, 5, 3, 0, 0, 38, 40, 3, 10, 5, 0, 39, 37, 1, 0, 0, 0, 39, 40, 1,
+		0, 0, 0, 40, 5, 1, 0, 0, 0, 41, 42, 5, 12, 0, 0, 42, 43, 5, 3, 0, 0, 43,
+		44, 3, 10, 5, 0, 44, 7, 1, 0, 0, 0, 45, 48, 3, 10, 5, 0, 46, 48, 3, 16,
+		8, 0, 47, 45, 1, 0, 0, 0, 47, 46, 1, 0, 0, 0, 48, 9, 1, 0, 0, 0, 49, 50,
+		6, 5, -1, 0, 50, 51, 3, 12, 6, 0, 51, 57, 1, 0, 0, 0, 52, 53, 10, 1, 0,
+		0, 53, 54, 7, 0, 0, 0, 54, 56, 3, 12, 6, 0, 55, 52, 1, 0, 0, 0, 56, 59,
+		1, 0, 0, 0, 57, 55, 1, 0, 0, 0, 57, 58, 1, 0, 0, 0, 58, 11, 1, 0, 0, 0,
+		59, 57, 1, 0, 0, 0, 60, 61, 6, 6, -1, 0, 61, 62, 3, 14, 7, 0, 62, 68, 1,
+		0, 0, 0, 63, 64, 10, 1, 0, 0, 64, 65, 7, 1, 0, 0, 65, 67, 3, 14, 7, 0,
+		66, 63, 1, 0, 0, 0, 67, 70, 1, 0, 0, 0, 68, 66, 1, 0, 0, 0, 68, 69, 1,
+		0, 0, 0, 69, 13, 1, 0, 0, 0, 70, 68, 1, 0, 0, 0, 71, 78, 5, 2, 0, 0, 72,
+		78, 5, 12, 0, 0, 73, 74, 5, 10, 0, 0, 74, 75, 3, 8, 4, 0, 75, 76, 5, 11,
+		0, 0, 76, 78, 1, 0, 0, 0, 77, 71, 1, 0, 0, 0, 77, 72, 1, 0, 0, 0, 77, 73,
+		1, 0, 0, 0, 78, 15, 1, 0, 0, 0, 79, 80, 5, 12, 0, 0, 80, 82, 5, 10, 0,
+		0, 81, 83, 3, 18, 9, 0, 82, 81, 1, 0, 0, 0, 82, 83, 1, 0, 0, 0, 83, 84,
+		1, 0, 0, 0, 84, 85, 5, 11, 0, 0, 85, 17, 1, 0, 0, 0, 86, 95, 3, 8, 4, 0,
+		87, 90, 3, 8, 4, 0, 88, 89, 5, 8, 0, 0, 89, 91, 3, 8, 4, 0, 90, 88, 1,
+		0, 0, 0, 91, 92, 1, 0, 0, 0, 92, 90, 1, 0, 0, 0, 92, 93, 1, 0, 0, 0, 93,
+		95, 1, 0, 0, 0, 94, 86, 1, 0, 0, 0, 94, 87, 1, 0, 0, 0, 95, 19, 1, 0, 0,
+		0, 11, 26, 28, 33, 39, 47, 57, 68, 77, 82, 92, 94,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -121,12 +131,13 @@ const (
 	SimpleScriptParserMinus          = 5
 	SimpleScriptParserStar           = 6
 	SimpleScriptParserSlash          = 7
-	SimpleScriptParserSemiColon      = 8
-	SimpleScriptParserLeftParen      = 9
-	SimpleScriptParserRightParen     = 10
-	SimpleScriptParserIdentifier     = 11
-	SimpleScriptParserWhitespace     = 12
-	SimpleScriptParserNewline        = 13
+	SimpleScriptParserComma          = 8
+	SimpleScriptParserSemiColon      = 9
+	SimpleScriptParserLeftParen      = 10
+	SimpleScriptParserRightParen     = 11
+	SimpleScriptParserIdentifier     = 12
+	SimpleScriptParserWhitespace     = 13
+	SimpleScriptParserNewline        = 14
 )
 
 // SimpleScriptParser rules.
@@ -139,6 +150,8 @@ const (
 	SimpleScriptParserRULE_additive       = 5
 	SimpleScriptParserRULE_multiplicative = 6
 	SimpleScriptParserRULE_primary        = 7
+	SimpleScriptParserRULE_functionCall   = 8
+	SimpleScriptParserRULE_expressionList = 9
 )
 
 // IProgrammContext is an interface to support dynamic dispatch.
@@ -272,33 +285,33 @@ func (p *SimpleScriptParser) Programm() (localctx IProgrammContext) {
 		}
 	}()
 
-	p.SetState(24)
+	p.SetState(28)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(16)
+			p.SetState(20)
 			p.Statement()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
-		p.SetState(20)
+		p.SetState(24)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		for ok := true; ok; ok = (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SimpleScriptParserInt)|(1<<SimpleScriptParserIntegerLiteral)|(1<<SimpleScriptParserLeftParen)|(1<<SimpleScriptParserIdentifier))) != 0) {
 			{
-				p.SetState(17)
+				p.SetState(21)
 				p.Statement()
 			}
 			{
-				p.SetState(18)
+				p.SetState(22)
 				p.Match(SimpleScriptParserSemiColon)
 			}
 
-			p.SetState(22)
+			p.SetState(26)
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 		}
@@ -437,27 +450,27 @@ func (p *SimpleScriptParser) Statement() (localctx IStatementContext) {
 		}
 	}()
 
-	p.SetState(29)
+	p.SetState(33)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(26)
+			p.SetState(30)
 			p.IntDeclaration()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(27)
+			p.SetState(31)
 			p.Assignment()
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(28)
+			p.SetState(32)
 			p.Expression()
 		}
 
@@ -578,24 +591,24 @@ func (p *SimpleScriptParser) IntDeclaration() (localctx IIntDeclarationContext) 
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(31)
+		p.SetState(35)
 		p.Match(SimpleScriptParserInt)
 	}
 	{
-		p.SetState(32)
+		p.SetState(36)
 		p.Match(SimpleScriptParserIdentifier)
 	}
-	p.SetState(35)
+	p.SetState(39)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == SimpleScriptParserAssignmentOP {
 		{
-			p.SetState(33)
+			p.SetState(37)
 			p.Match(SimpleScriptParserAssignmentOP)
 		}
 		{
-			p.SetState(34)
+			p.SetState(38)
 			p.additive(0)
 		}
 
@@ -711,15 +724,15 @@ func (p *SimpleScriptParser) Assignment() (localctx IAssignmentContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(37)
+		p.SetState(41)
 		p.Match(SimpleScriptParserIdentifier)
 	}
 	{
-		p.SetState(38)
+		p.SetState(42)
 		p.Match(SimpleScriptParserAssignmentOP)
 	}
 	{
-		p.SetState(39)
+		p.SetState(43)
 		p.additive(0)
 	}
 
@@ -780,6 +793,22 @@ func (s *ExpressionContext) Additive() IAdditiveContext {
 	return t.(IAdditiveContext)
 }
 
+func (s *ExpressionContext) FunctionCall() IFunctionCallContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IFunctionCallContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IFunctionCallContext)
+}
+
 func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -823,10 +852,23 @@ func (p *SimpleScriptParser) Expression() (localctx IExpressionContext) {
 		}
 	}()
 
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(41)
-		p.additive(0)
+	p.SetState(47)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(45)
+			p.additive(0)
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(46)
+			p.FunctionCall()
+		}
+
 	}
 
 	return localctx
@@ -978,14 +1020,14 @@ func (p *SimpleScriptParser) additive(_p int) (localctx IAdditiveContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(44)
+		p.SetState(50)
 		p.multiplicative(0)
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(51)
+	p.SetState(57)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -995,13 +1037,13 @@ func (p *SimpleScriptParser) additive(_p int) (localctx IAdditiveContext) {
 			_prevctx = localctx
 			localctx = NewAdditiveContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SimpleScriptParserRULE_additive)
-			p.SetState(46)
+			p.SetState(52)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 1)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
 			}
 			{
-				p.SetState(47)
+				p.SetState(53)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -1019,14 +1061,14 @@ func (p *SimpleScriptParser) additive(_p int) (localctx IAdditiveContext) {
 				}
 			}
 			{
-				p.SetState(48)
+				p.SetState(54)
 				p.multiplicative(0)
 			}
 
 		}
-		p.SetState(53)
+		p.SetState(59)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -1178,14 +1220,14 @@ func (p *SimpleScriptParser) multiplicative(_p int) (localctx IMultiplicativeCon
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(55)
+		p.SetState(61)
 		p.Primary()
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(62)
+	p.SetState(68)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -1195,13 +1237,13 @@ func (p *SimpleScriptParser) multiplicative(_p int) (localctx IMultiplicativeCon
 			_prevctx = localctx
 			localctx = NewMultiplicativeContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SimpleScriptParserRULE_multiplicative)
-			p.SetState(57)
+			p.SetState(63)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 1)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
 			}
 			{
-				p.SetState(58)
+				p.SetState(64)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -1219,14 +1261,14 @@ func (p *SimpleScriptParser) multiplicative(_p int) (localctx IMultiplicativeCon
 				}
 			}
 			{
-				p.SetState(59)
+				p.SetState(65)
 				p.Primary()
 			}
 
 		}
-		p.SetState(64)
+		p.SetState(70)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -1345,41 +1387,350 @@ func (p *SimpleScriptParser) Primary() (localctx IPrimaryContext) {
 		}
 	}()
 
-	p.SetState(71)
+	p.SetState(77)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SimpleScriptParserIntegerLiteral:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(65)
+			p.SetState(71)
 			p.Match(SimpleScriptParserIntegerLiteral)
 		}
 
 	case SimpleScriptParserIdentifier:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(66)
+			p.SetState(72)
 			p.Match(SimpleScriptParserIdentifier)
 		}
 
 	case SimpleScriptParserLeftParen:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(67)
+			p.SetState(73)
 			p.Match(SimpleScriptParserLeftParen)
 		}
 		{
-			p.SetState(68)
+			p.SetState(74)
 			p.Expression()
 		}
 		{
-			p.SetState(69)
+			p.SetState(75)
 			p.Match(SimpleScriptParserRightParen)
 		}
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// IFunctionCallContext is an interface to support dynamic dispatch.
+type IFunctionCallContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsFunctionCallContext differentiates from other interfaces.
+	IsFunctionCallContext()
+}
+
+type FunctionCallContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyFunctionCallContext() *FunctionCallContext {
+	var p = new(FunctionCallContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SimpleScriptParserRULE_functionCall
+	return p
+}
+
+func (*FunctionCallContext) IsFunctionCallContext() {}
+
+func NewFunctionCallContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *FunctionCallContext {
+	var p = new(FunctionCallContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SimpleScriptParserRULE_functionCall
+
+	return p
+}
+
+func (s *FunctionCallContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *FunctionCallContext) Identifier() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserIdentifier, 0)
+}
+
+func (s *FunctionCallContext) LeftParen() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserLeftParen, 0)
+}
+
+func (s *FunctionCallContext) RightParen() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserRightParen, 0)
+}
+
+func (s *FunctionCallContext) ExpressionList() IExpressionListContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExpressionListContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionListContext)
+}
+
+func (s *FunctionCallContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *FunctionCallContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *FunctionCallContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.EnterFunctionCall(s)
+	}
+}
+
+func (s *FunctionCallContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.ExitFunctionCall(s)
+	}
+}
+
+func (p *SimpleScriptParser) FunctionCall() (localctx IFunctionCallContext) {
+	this := p
+	_ = this
+
+	localctx = NewFunctionCallContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 16, SimpleScriptParserRULE_functionCall)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(79)
+		p.Match(SimpleScriptParserIdentifier)
+	}
+	{
+		p.SetState(80)
+		p.Match(SimpleScriptParserLeftParen)
+	}
+	p.SetState(82)
+	p.GetErrorHandler().Sync(p)
+	_la = p.GetTokenStream().LA(1)
+
+	if ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SimpleScriptParserIntegerLiteral)|(1<<SimpleScriptParserLeftParen)|(1<<SimpleScriptParserIdentifier))) != 0 {
+		{
+			p.SetState(81)
+			p.ExpressionList()
+		}
+
+	}
+	{
+		p.SetState(84)
+		p.Match(SimpleScriptParserRightParen)
+	}
+
+	return localctx
+}
+
+// IExpressionListContext is an interface to support dynamic dispatch.
+type IExpressionListContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsExpressionListContext differentiates from other interfaces.
+	IsExpressionListContext()
+}
+
+type ExpressionListContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyExpressionListContext() *ExpressionListContext {
+	var p = new(ExpressionListContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SimpleScriptParserRULE_expressionList
+	return p
+}
+
+func (*ExpressionListContext) IsExpressionListContext() {}
+
+func NewExpressionListContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExpressionListContext {
+	var p = new(ExpressionListContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SimpleScriptParserRULE_expressionList
+
+	return p
+}
+
+func (s *ExpressionListContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ExpressionListContext) AllExpression() []IExpressionContext {
+	children := s.GetChildren()
+	len := 0
+	for _, ctx := range children {
+		if _, ok := ctx.(IExpressionContext); ok {
+			len++
+		}
+	}
+
+	tst := make([]IExpressionContext, len)
+	i := 0
+	for _, ctx := range children {
+		if t, ok := ctx.(IExpressionContext); ok {
+			tst[i] = t.(IExpressionContext)
+			i++
+		}
+	}
+
+	return tst
+}
+
+func (s *ExpressionListContext) Expression(i int) IExpressionContext {
+	var t antlr.RuleContext
+	j := 0
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExpressionContext); ok {
+			if j == i {
+				t = ctx.(antlr.RuleContext)
+				break
+			}
+			j++
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionContext)
+}
+
+func (s *ExpressionListContext) AllComma() []antlr.TerminalNode {
+	return s.GetTokens(SimpleScriptParserComma)
+}
+
+func (s *ExpressionListContext) Comma(i int) antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserComma, i)
+}
+
+func (s *ExpressionListContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ExpressionListContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ExpressionListContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.EnterExpressionList(s)
+	}
+}
+
+func (s *ExpressionListContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.ExitExpressionList(s)
+	}
+}
+
+func (p *SimpleScriptParser) ExpressionList() (localctx IExpressionListContext) {
+	this := p
+	_ = this
+
+	localctx = NewExpressionListContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 18, SimpleScriptParserRULE_expressionList)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(94)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(86)
+			p.Expression()
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(87)
+			p.Expression()
+		}
+		p.SetState(90)
+		p.GetErrorHandler().Sync(p)
+		_la = p.GetTokenStream().LA(1)
+
+		for ok := true; ok; ok = _la == SimpleScriptParserComma {
+			{
+				p.SetState(88)
+				p.Match(SimpleScriptParserComma)
+			}
+			{
+				p.SetState(89)
+				p.Expression()
+			}
+
+			p.SetState(92)
+			p.GetErrorHandler().Sync(p)
+			_la = p.GetTokenStream().LA(1)
+		}
+
 	}
 
 	return localctx

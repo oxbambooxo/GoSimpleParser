@@ -13,6 +13,7 @@ Plus:               '+';
 Minus:              '-';
 Star:               '*';
 Slash:              '/';
+Comma:              ',';
 SemiColon:          ';';
 LeftParen:          '(';
 RightParen:         ')';

@@ -32,6 +32,12 @@ type SimpleScriptListener interface {
 	// EnterPrimary is called when entering the primary production.
 	EnterPrimary(c *PrimaryContext)
 
+	// EnterFunctionCall is called when entering the functionCall production.
+	EnterFunctionCall(c *FunctionCallContext)
+
+	// EnterExpressionList is called when entering the expressionList production.
+	EnterExpressionList(c *ExpressionListContext)
+
 	// ExitProgramm is called when exiting the programm production.
 	ExitProgramm(c *ProgrammContext)
 
@@ -55,4 +61,10 @@ type SimpleScriptListener interface {
 
 	// ExitPrimary is called when exiting the primary production.
 	ExitPrimary(c *PrimaryContext)
+
+	// ExitFunctionCall is called when exiting the functionCall production.
+	ExitFunctionCall(c *FunctionCallContext)
+
+	// ExitExpressionList is called when exiting the expressionList production.
+	ExitExpressionList(c *ExpressionListContext)
 }

@@ -49,14 +49,14 @@ func EvalString(str string) (value interface{}, err error) {
 type Evaluator struct {
 	local map[string]interface{}
 	*parser.BaseSimpleScriptListener
-	stack []int64
+	stack []interface{}
 }
 
-func (evaluator *Evaluator) push(i int64) {
+func (evaluator *Evaluator) push(i interface{}) {
 	evaluator.stack = append(evaluator.stack, i)
 }
 
-func (evaluator *Evaluator) pop() int64 {
+func (evaluator *Evaluator) pop() interface{} {
 	if len(evaluator.stack) == 0 {
 		panic("stack is empty unable to pop")
 	}
@@ -65,17 +65,17 @@ func (evaluator *Evaluator) pop() int64 {
 	return result
 }
 
-func (evaluator *Evaluator) peek() int64 {
+func (evaluator *Evaluator) peek() interface{} {
 	if len(evaluator.stack) == 0 {
 		panic("stack is empty unable to peek")
 	}
 	return evaluator.stack[len(evaluator.stack)-1]
 }
 
-func (evaluator *Evaluator) getVariable(variableName string) int64 {
-	value, exist := evaluator.local[variableName]
+func (evaluator *Evaluator) getObject(objectName string) interface{} {
+	value, exist := evaluator.local[objectName]
 	if !exist {
-		panic("undefined variable " + variableName)
+		panic("undefined object " + objectName)
 	}
-	return value.(int64)
+	return value
 }

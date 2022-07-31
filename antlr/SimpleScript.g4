@@ -24,6 +24,7 @@ assignment
 
 expression
     : additive
+    | functionCall
     ;
 
 additive
@@ -40,4 +41,13 @@ primary
     : IntegerLiteral
     | Identifier
     | '(' expression ')'
+    ;
+
+functionCall
+    : Identifier '(' expressionList? ')'
+    ;
+
+expressionList
+    : expression
+    | expression (',' expression)+
     ;

@@ -68,3 +68,15 @@ func (s *BaseSimpleScriptListener) EnterPrimary(ctx *PrimaryContext) {}
 
 // ExitPrimary is called when production primary is exited.
 func (s *BaseSimpleScriptListener) ExitPrimary(ctx *PrimaryContext) {}
+
+// EnterFunctionCall is called when production functionCall is entered.
+func (s *BaseSimpleScriptListener) EnterFunctionCall(ctx *FunctionCallContext) {}
+
+// ExitFunctionCall is called when production functionCall is exited.
+func (s *BaseSimpleScriptListener) ExitFunctionCall(ctx *FunctionCallContext) {}
+
+// EnterExpressionList is called when production expressionList is entered.
+func (s *BaseSimpleScriptListener) EnterExpressionList(ctx *ExpressionListContext) {}
+
+// ExitExpressionList is called when production expressionList is exited.
+func (s *BaseSimpleScriptListener) ExitExpressionList(ctx *ExpressionListContext) {}

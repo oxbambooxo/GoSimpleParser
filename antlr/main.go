@@ -21,9 +21,6 @@ func main() {
 		if input == "" {
 			continue
 		}
-		if input == "exit;" {
-			break
-		}
 
 		// 调试 eval
 		value, err := EvalString(input)
