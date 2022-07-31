@@ -41,38 +41,41 @@ func simplescriptParserInit() {
 		"Newline",
 	}
 	staticData.ruleNames = []string{
-		"programm", "intDeclaration", "assignment", "expression", "additive",
-		"multiplicative", "primary",
+		"programm", "statement", "intDeclaration", "assignment", "expression",
+		"additive", "multiplicative", "primary",
 	}
 	staticData.predictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 13, 66, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
-		4, 2, 5, 7, 5, 2, 6, 7, 6, 1, 0, 1, 0, 1, 0, 5, 0, 18, 8, 0, 10, 0, 12,
-		0, 21, 9, 0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 27, 8, 1, 1, 1, 3, 1, 30, 8,
-		1, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 36, 8, 2, 1, 3, 1, 3, 3, 3, 40, 8, 3,
-		1, 4, 1, 4, 1, 4, 5, 4, 45, 8, 4, 10, 4, 12, 4, 48, 9, 4, 1, 5, 1, 5, 1,
-		5, 5, 5, 53, 8, 5, 10, 5, 12, 5, 56, 9, 5, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6,
-		1, 6, 3, 6, 64, 8, 6, 1, 6, 0, 0, 7, 0, 2, 4, 6, 8, 10, 12, 0, 2, 1, 0,
-		4, 5, 1, 0, 6, 7, 69, 0, 19, 1, 0, 0, 0, 2, 22, 1, 0, 0, 0, 4, 31, 1, 0,
-		0, 0, 6, 37, 1, 0, 0, 0, 8, 41, 1, 0, 0, 0, 10, 49, 1, 0, 0, 0, 12, 63,
-		1, 0, 0, 0, 14, 18, 3, 2, 1, 0, 15, 18, 3, 4, 2, 0, 16, 18, 3, 6, 3, 0,
-		17, 14, 1, 0, 0, 0, 17, 15, 1, 0, 0, 0, 17, 16, 1, 0, 0, 0, 18, 21, 1,
-		0, 0, 0, 19, 17, 1, 0, 0, 0, 19, 20, 1, 0, 0, 0, 20, 1, 1, 0, 0, 0, 21,
-		19, 1, 0, 0, 0, 22, 23, 5, 1, 0, 0, 23, 26, 5, 11, 0, 0, 24, 25, 5, 3,
-		0, 0, 25, 27, 3, 8, 4, 0, 26, 24, 1, 0, 0, 0, 26, 27, 1, 0, 0, 0, 27, 29,
-		1, 0, 0, 0, 28, 30, 5, 8, 0, 0, 29, 28, 1, 0, 0, 0, 29, 30, 1, 0, 0, 0,
-		30, 3, 1, 0, 0, 0, 31, 32, 5, 11, 0, 0, 32, 33, 5, 3, 0, 0, 33, 35, 3,
-		8, 4, 0, 34, 36, 5, 8, 0, 0, 35, 34, 1, 0, 0, 0, 35, 36, 1, 0, 0, 0, 36,
-		5, 1, 0, 0, 0, 37, 39, 3, 8, 4, 0, 38, 40, 5, 8, 0, 0, 39, 38, 1, 0, 0,
-		0, 39, 40, 1, 0, 0, 0, 40, 7, 1, 0, 0, 0, 41, 46, 3, 10, 5, 0, 42, 43,
-		7, 0, 0, 0, 43, 45, 3, 10, 5, 0, 44, 42, 1, 0, 0, 0, 45, 48, 1, 0, 0, 0,
-		46, 44, 1, 0, 0, 0, 46, 47, 1, 0, 0, 0, 47, 9, 1, 0, 0, 0, 48, 46, 1, 0,
-		0, 0, 49, 54, 3, 12, 6, 0, 50, 51, 7, 1, 0, 0, 51, 53, 3, 12, 6, 0, 52,
-		50, 1, 0, 0, 0, 53, 56, 1, 0, 0, 0, 54, 52, 1, 0, 0, 0, 54, 55, 1, 0, 0,
-		0, 55, 11, 1, 0, 0, 0, 56, 54, 1, 0, 0, 0, 57, 64, 5, 2, 0, 0, 58, 64,
-		5, 11, 0, 0, 59, 60, 5, 9, 0, 0, 60, 61, 3, 6, 3, 0, 61, 62, 5, 10, 0,
-		0, 62, 64, 1, 0, 0, 0, 63, 57, 1, 0, 0, 0, 63, 58, 1, 0, 0, 0, 63, 59,
-		1, 0, 0, 0, 64, 13, 1, 0, 0, 0, 9, 17, 19, 26, 29, 35, 39, 46, 54, 63,
+		4, 1, 13, 74, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 1, 0, 1, 0, 1, 0, 1, 0, 4, 0, 21,
+		8, 0, 11, 0, 12, 0, 22, 3, 0, 25, 8, 0, 1, 1, 1, 1, 1, 1, 3, 1, 30, 8,
+		1, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 36, 8, 2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 4,
+		1, 4, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 5, 5, 50, 8, 5, 10, 5, 12, 5,
+		53, 9, 5, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 5, 6, 61, 8, 6, 10, 6, 12,
+		6, 64, 9, 6, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 3, 7, 72, 8, 7, 1, 7,
+		0, 2, 10, 12, 8, 0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 1, 0, 4, 5, 1, 0, 6,
+		7, 74, 0, 24, 1, 0, 0, 0, 2, 29, 1, 0, 0, 0, 4, 31, 1, 0, 0, 0, 6, 37,
+		1, 0, 0, 0, 8, 41, 1, 0, 0, 0, 10, 43, 1, 0, 0, 0, 12, 54, 1, 0, 0, 0,
+		14, 71, 1, 0, 0, 0, 16, 25, 3, 2, 1, 0, 17, 18, 3, 2, 1, 0, 18, 19, 5,
+		8, 0, 0, 19, 21, 1, 0, 0, 0, 20, 17, 1, 0, 0, 0, 21, 22, 1, 0, 0, 0, 22,
+		20, 1, 0, 0, 0, 22, 23, 1, 0, 0, 0, 23, 25, 1, 0, 0, 0, 24, 16, 1, 0, 0,
+		0, 24, 20, 1, 0, 0, 0, 25, 1, 1, 0, 0, 0, 26, 30, 3, 4, 2, 0, 27, 30, 3,
+		6, 3, 0, 28, 30, 3, 8, 4, 0, 29, 26, 1, 0, 0, 0, 29, 27, 1, 0, 0, 0, 29,
+		28, 1, 0, 0, 0, 30, 3, 1, 0, 0, 0, 31, 32, 5, 1, 0, 0, 32, 35, 5, 11, 0,
+		0, 33, 34, 5, 3, 0, 0, 34, 36, 3, 10, 5, 0, 35, 33, 1, 0, 0, 0, 35, 36,
+		1, 0, 0, 0, 36, 5, 1, 0, 0, 0, 37, 38, 5, 11, 0, 0, 38, 39, 5, 3, 0, 0,
+		39, 40, 3, 10, 5, 0, 40, 7, 1, 0, 0, 0, 41, 42, 3, 10, 5, 0, 42, 9, 1,
+		0, 0, 0, 43, 44, 6, 5, -1, 0, 44, 45, 3, 12, 6, 0, 45, 51, 1, 0, 0, 0,
+		46, 47, 10, 1, 0, 0, 47, 48, 7, 0, 0, 0, 48, 50, 3, 12, 6, 0, 49, 46, 1,
+		0, 0, 0, 50, 53, 1, 0, 0, 0, 51, 49, 1, 0, 0, 0, 51, 52, 1, 0, 0, 0, 52,
+		11, 1, 0, 0, 0, 53, 51, 1, 0, 0, 0, 54, 55, 6, 6, -1, 0, 55, 56, 3, 14,
+		7, 0, 56, 62, 1, 0, 0, 0, 57, 58, 10, 1, 0, 0, 58, 59, 7, 1, 0, 0, 59,
+		61, 3, 14, 7, 0, 60, 57, 1, 0, 0, 0, 61, 64, 1, 0, 0, 0, 62, 60, 1, 0,
+		0, 0, 62, 63, 1, 0, 0, 0, 63, 13, 1, 0, 0, 0, 64, 62, 1, 0, 0, 0, 65, 72,
+		5, 2, 0, 0, 66, 72, 5, 11, 0, 0, 67, 68, 5, 9, 0, 0, 68, 69, 3, 8, 4, 0,
+		69, 70, 5, 10, 0, 0, 70, 72, 1, 0, 0, 0, 71, 65, 1, 0, 0, 0, 71, 66, 1,
+		0, 0, 0, 71, 67, 1, 0, 0, 0, 72, 15, 1, 0, 0, 0, 7, 22, 24, 29, 35, 51,
+		62, 71,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -129,12 +132,13 @@ const (
 // SimpleScriptParser rules.
 const (
 	SimpleScriptParserRULE_programm       = 0
-	SimpleScriptParserRULE_intDeclaration = 1
-	SimpleScriptParserRULE_assignment     = 2
-	SimpleScriptParserRULE_expression     = 3
-	SimpleScriptParserRULE_additive       = 4
-	SimpleScriptParserRULE_multiplicative = 5
-	SimpleScriptParserRULE_primary        = 6
+	SimpleScriptParserRULE_statement      = 1
+	SimpleScriptParserRULE_intDeclaration = 2
+	SimpleScriptParserRULE_assignment     = 3
+	SimpleScriptParserRULE_expression     = 4
+	SimpleScriptParserRULE_additive       = 5
+	SimpleScriptParserRULE_multiplicative = 6
+	SimpleScriptParserRULE_primary        = 7
 )
 
 // IProgrammContext is an interface to support dynamic dispatch.
@@ -175,20 +179,20 @@ func NewProgrammContext(parser antlr.Parser, parent antlr.ParserRuleContext, inv
 
 func (s *ProgrammContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ProgrammContext) AllIntDeclaration() []IIntDeclarationContext {
+func (s *ProgrammContext) AllStatement() []IStatementContext {
 	children := s.GetChildren()
 	len := 0
 	for _, ctx := range children {
-		if _, ok := ctx.(IIntDeclarationContext); ok {
+		if _, ok := ctx.(IStatementContext); ok {
 			len++
 		}
 	}
 
-	tst := make([]IIntDeclarationContext, len)
+	tst := make([]IStatementContext, len)
 	i := 0
 	for _, ctx := range children {
-		if t, ok := ctx.(IIntDeclarationContext); ok {
-			tst[i] = t.(IIntDeclarationContext)
+		if t, ok := ctx.(IStatementContext); ok {
+			tst[i] = t.(IStatementContext)
 			i++
 		}
 	}
@@ -196,11 +200,11 @@ func (s *ProgrammContext) AllIntDeclaration() []IIntDeclarationContext {
 	return tst
 }
 
-func (s *ProgrammContext) IntDeclaration(i int) IIntDeclarationContext {
+func (s *ProgrammContext) Statement(i int) IStatementContext {
 	var t antlr.RuleContext
 	j := 0
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IIntDeclarationContext); ok {
+		if _, ok := ctx.(IStatementContext); ok {
 			if j == i {
 				t = ctx.(antlr.RuleContext)
 				break
@@ -213,89 +217,15 @@ func (s *ProgrammContext) IntDeclaration(i int) IIntDeclarationContext {
 		return nil
 	}
 
-	return t.(IIntDeclarationContext)
+	return t.(IStatementContext)
 }
 
-func (s *ProgrammContext) AllAssignment() []IAssignmentContext {
-	children := s.GetChildren()
-	len := 0
-	for _, ctx := range children {
-		if _, ok := ctx.(IAssignmentContext); ok {
-			len++
-		}
-	}
-
-	tst := make([]IAssignmentContext, len)
-	i := 0
-	for _, ctx := range children {
-		if t, ok := ctx.(IAssignmentContext); ok {
-			tst[i] = t.(IAssignmentContext)
-			i++
-		}
-	}
-
-	return tst
+func (s *ProgrammContext) AllSemiColon() []antlr.TerminalNode {
+	return s.GetTokens(SimpleScriptParserSemiColon)
 }
 
-func (s *ProgrammContext) Assignment(i int) IAssignmentContext {
-	var t antlr.RuleContext
-	j := 0
-	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IAssignmentContext); ok {
-			if j == i {
-				t = ctx.(antlr.RuleContext)
-				break
-			}
-			j++
-		}
-	}
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IAssignmentContext)
-}
-
-func (s *ProgrammContext) AllExpression() []IExpressionContext {
-	children := s.GetChildren()
-	len := 0
-	for _, ctx := range children {
-		if _, ok := ctx.(IExpressionContext); ok {
-			len++
-		}
-	}
-
-	tst := make([]IExpressionContext, len)
-	i := 0
-	for _, ctx := range children {
-		if t, ok := ctx.(IExpressionContext); ok {
-			tst[i] = t.(IExpressionContext)
-			i++
-		}
-	}
-
-	return tst
-}
-
-func (s *ProgrammContext) Expression(i int) IExpressionContext {
-	var t antlr.RuleContext
-	j := 0
-	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExpressionContext); ok {
-			if j == i {
-				t = ctx.(antlr.RuleContext)
-				break
-			}
-			j++
-		}
-	}
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IExpressionContext)
+func (s *ProgrammContext) SemiColon(i int) antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserSemiColon, i)
 }
 
 func (s *ProgrammContext) GetRuleContext() antlr.RuleContext {
@@ -342,38 +272,195 @@ func (p *SimpleScriptParser) Programm() (localctx IProgrammContext) {
 		}
 	}()
 
-	p.EnterOuterAlt(localctx, 1)
-	p.SetState(19)
+	p.SetState(24)
 	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	for ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SimpleScriptParserInt)|(1<<SimpleScriptParserIntegerLiteral)|(1<<SimpleScriptParserLeftParen)|(1<<SimpleScriptParserIdentifier))) != 0 {
-		p.SetState(17)
-		p.GetErrorHandler().Sync(p)
-		switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext()) {
-		case 1:
-			{
-				p.SetState(14)
-				p.IntDeclaration()
-			}
-
-		case 2:
-			{
-				p.SetState(15)
-				p.Assignment()
-			}
-
-		case 3:
-			{
-				p.SetState(16)
-				p.Expression()
-			}
-
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(16)
+			p.Statement()
 		}
 
-		p.SetState(21)
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		p.SetState(20)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
+
+		for ok := true; ok; ok = (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SimpleScriptParserInt)|(1<<SimpleScriptParserIntegerLiteral)|(1<<SimpleScriptParserLeftParen)|(1<<SimpleScriptParserIdentifier))) != 0) {
+			{
+				p.SetState(17)
+				p.Statement()
+			}
+			{
+				p.SetState(18)
+				p.Match(SimpleScriptParserSemiColon)
+			}
+
+			p.SetState(22)
+			p.GetErrorHandler().Sync(p)
+			_la = p.GetTokenStream().LA(1)
+		}
+
+	}
+
+	return localctx
+}
+
+// IStatementContext is an interface to support dynamic dispatch.
+type IStatementContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsStatementContext differentiates from other interfaces.
+	IsStatementContext()
+}
+
+type StatementContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyStatementContext() *StatementContext {
+	var p = new(StatementContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SimpleScriptParserRULE_statement
+	return p
+}
+
+func (*StatementContext) IsStatementContext() {}
+
+func NewStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StatementContext {
+	var p = new(StatementContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SimpleScriptParserRULE_statement
+
+	return p
+}
+
+func (s *StatementContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *StatementContext) IntDeclaration() IIntDeclarationContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IIntDeclarationContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IIntDeclarationContext)
+}
+
+func (s *StatementContext) Assignment() IAssignmentContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IAssignmentContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAssignmentContext)
+}
+
+func (s *StatementContext) Expression() IExpressionContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExpressionContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionContext)
+}
+
+func (s *StatementContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *StatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *StatementContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.EnterStatement(s)
+	}
+}
+
+func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleScriptListener); ok {
+		listenerT.ExitStatement(s)
+	}
+}
+
+func (p *SimpleScriptParser) Statement() (localctx IStatementContext) {
+	this := p
+	_ = this
+
+	localctx = NewStatementContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 2, SimpleScriptParserRULE_statement)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(29)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(26)
+			p.IntDeclaration()
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(27)
+			p.Assignment()
+		}
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(28)
+			p.Expression()
+		}
+
 	}
 
 	return localctx
@@ -445,10 +532,6 @@ func (s *IntDeclarationContext) Additive() IAdditiveContext {
 	return t.(IAdditiveContext)
 }
 
-func (s *IntDeclarationContext) SemiColon() antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserSemiColon, 0)
-}
-
 func (s *IntDeclarationContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -474,7 +557,7 @@ func (p *SimpleScriptParser) IntDeclaration() (localctx IIntDeclarationContext) 
 	_ = this
 
 	localctx = NewIntDeclarationContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 2, SimpleScriptParserRULE_intDeclaration)
+	p.EnterRule(localctx, 4, SimpleScriptParserRULE_intDeclaration)
 	var _la int
 
 	defer func() {
@@ -495,36 +578,25 @@ func (p *SimpleScriptParser) IntDeclaration() (localctx IIntDeclarationContext) 
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(22)
+		p.SetState(31)
 		p.Match(SimpleScriptParserInt)
 	}
 	{
-		p.SetState(23)
+		p.SetState(32)
 		p.Match(SimpleScriptParserIdentifier)
 	}
-	p.SetState(26)
+	p.SetState(35)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == SimpleScriptParserAssignmentOP {
 		{
-			p.SetState(24)
+			p.SetState(33)
 			p.Match(SimpleScriptParserAssignmentOP)
 		}
 		{
-			p.SetState(25)
-			p.Additive()
-		}
-
-	}
-	p.SetState(29)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	if _la == SimpleScriptParserSemiColon {
-		{
-			p.SetState(28)
-			p.Match(SimpleScriptParserSemiColon)
+			p.SetState(34)
+			p.additive(0)
 		}
 
 	}
@@ -594,10 +666,6 @@ func (s *AssignmentContext) Additive() IAdditiveContext {
 	return t.(IAdditiveContext)
 }
 
-func (s *AssignmentContext) SemiColon() antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserSemiColon, 0)
-}
-
 func (s *AssignmentContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -623,8 +691,7 @@ func (p *SimpleScriptParser) Assignment() (localctx IAssignmentContext) {
 	_ = this
 
 	localctx = NewAssignmentContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 4, SimpleScriptParserRULE_assignment)
-	var _la int
+	p.EnterRule(localctx, 6, SimpleScriptParserRULE_assignment)
 
 	defer func() {
 		p.ExitRule()
@@ -644,27 +711,16 @@ func (p *SimpleScriptParser) Assignment() (localctx IAssignmentContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(31)
+		p.SetState(37)
 		p.Match(SimpleScriptParserIdentifier)
 	}
 	{
-		p.SetState(32)
+		p.SetState(38)
 		p.Match(SimpleScriptParserAssignmentOP)
 	}
 	{
-		p.SetState(33)
-		p.Additive()
-	}
-	p.SetState(35)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	if _la == SimpleScriptParserSemiColon {
-		{
-			p.SetState(34)
-			p.Match(SimpleScriptParserSemiColon)
-		}
-
+		p.SetState(39)
+		p.additive(0)
 	}
 
 	return localctx
@@ -724,10 +780,6 @@ func (s *ExpressionContext) Additive() IAdditiveContext {
 	return t.(IAdditiveContext)
 }
 
-func (s *ExpressionContext) SemiColon() antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserSemiColon, 0)
-}
-
 func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -753,8 +805,7 @@ func (p *SimpleScriptParser) Expression() (localctx IExpressionContext) {
 	_ = this
 
 	localctx = NewExpressionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 6, SimpleScriptParserRULE_expression)
-	var _la int
+	p.EnterRule(localctx, 8, SimpleScriptParserRULE_expression)
 
 	defer func() {
 		p.ExitRule()
@@ -774,19 +825,8 @@ func (p *SimpleScriptParser) Expression() (localctx IExpressionContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(37)
-		p.Additive()
-	}
-	p.SetState(39)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	if _la == SimpleScriptParserSemiColon {
-		{
-			p.SetState(38)
-			p.Match(SimpleScriptParserSemiColon)
-		}
-
+		p.SetState(41)
+		p.additive(0)
 	}
 
 	return localctx
@@ -841,37 +881,12 @@ func (s *AdditiveContext) GetOp() antlr.Token { return s.op }
 
 func (s *AdditiveContext) SetOp(v antlr.Token) { s.op = v }
 
-func (s *AdditiveContext) AllMultiplicative() []IMultiplicativeContext {
-	children := s.GetChildren()
-	len := 0
-	for _, ctx := range children {
-		if _, ok := ctx.(IMultiplicativeContext); ok {
-			len++
-		}
-	}
-
-	tst := make([]IMultiplicativeContext, len)
-	i := 0
-	for _, ctx := range children {
-		if t, ok := ctx.(IMultiplicativeContext); ok {
-			tst[i] = t.(IMultiplicativeContext)
-			i++
-		}
-	}
-
-	return tst
-}
-
-func (s *AdditiveContext) Multiplicative(i int) IMultiplicativeContext {
+func (s *AdditiveContext) Multiplicative() IMultiplicativeContext {
 	var t antlr.RuleContext
-	j := 0
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IMultiplicativeContext); ok {
-			if j == i {
-				t = ctx.(antlr.RuleContext)
-				break
-			}
-			j++
+			t = ctx.(antlr.RuleContext)
+			break
 		}
 	}
 
@@ -882,20 +897,28 @@ func (s *AdditiveContext) Multiplicative(i int) IMultiplicativeContext {
 	return t.(IMultiplicativeContext)
 }
 
-func (s *AdditiveContext) AllPlus() []antlr.TerminalNode {
-	return s.GetTokens(SimpleScriptParserPlus)
+func (s *AdditiveContext) Additive() IAdditiveContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IAdditiveContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAdditiveContext)
 }
 
-func (s *AdditiveContext) Plus(i int) antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserPlus, i)
+func (s *AdditiveContext) Plus() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserPlus, 0)
 }
 
-func (s *AdditiveContext) AllMinus() []antlr.TerminalNode {
-	return s.GetTokens(SimpleScriptParserMinus)
-}
-
-func (s *AdditiveContext) Minus(i int) antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserMinus, i)
+func (s *AdditiveContext) Minus() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserMinus, 0)
 }
 
 func (s *AdditiveContext) GetRuleContext() antlr.RuleContext {
@@ -919,15 +942,24 @@ func (s *AdditiveContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 func (p *SimpleScriptParser) Additive() (localctx IAdditiveContext) {
+	return p.additive(0)
+}
+
+func (p *SimpleScriptParser) additive(_p int) (localctx IAdditiveContext) {
 	this := p
 	_ = this
 
-	localctx = NewAdditiveContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, SimpleScriptParserRULE_additive)
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewAdditiveContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IAdditiveContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 10
+	p.EnterRecursionRule(localctx, 10, SimpleScriptParserRULE_additive, _p)
 	var _la int
 
 	defer func() {
-		p.ExitRule()
+		p.UnrollRecursionContexts(_parentctx)
 	}()
 
 	defer func() {
@@ -942,42 +974,59 @@ func (p *SimpleScriptParser) Additive() (localctx IAdditiveContext) {
 		}
 	}()
 
+	var _alt int
+
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(41)
-		p.Multiplicative()
+		p.SetState(44)
+		p.multiplicative(0)
 	}
-	p.SetState(46)
+
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(51)
 	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext())
 
-	for _la == SimpleScriptParserPlus || _la == SimpleScriptParserMinus {
-		{
-			p.SetState(42)
-
-			var _lt = p.GetTokenStream().LT(1)
-
-			localctx.(*AdditiveContext).op = _lt
-
-			_la = p.GetTokenStream().LA(1)
-
-			if !(_la == SimpleScriptParserPlus || _la == SimpleScriptParserMinus) {
-				var _ri = p.GetErrorHandler().RecoverInline(p)
-
-				localctx.(*AdditiveContext).op = _ri
-			} else {
-				p.GetErrorHandler().ReportMatch(p)
-				p.Consume()
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
 			}
-		}
-		{
-			p.SetState(43)
-			p.Multiplicative()
-		}
+			_prevctx = localctx
+			localctx = NewAdditiveContext(p, _parentctx, _parentState)
+			p.PushNewRecursionContext(localctx, _startState, SimpleScriptParserRULE_additive)
+			p.SetState(46)
 
-		p.SetState(48)
+			if !(p.Precpred(p.GetParserRuleContext(), 1)) {
+				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
+			}
+			{
+				p.SetState(47)
+
+				var _lt = p.GetTokenStream().LT(1)
+
+				localctx.(*AdditiveContext).op = _lt
+
+				_la = p.GetTokenStream().LA(1)
+
+				if !(_la == SimpleScriptParserPlus || _la == SimpleScriptParserMinus) {
+					var _ri = p.GetErrorHandler().RecoverInline(p)
+
+					localctx.(*AdditiveContext).op = _ri
+				} else {
+					p.GetErrorHandler().ReportMatch(p)
+					p.Consume()
+				}
+			}
+			{
+				p.SetState(48)
+				p.multiplicative(0)
+			}
+
+		}
+		p.SetState(53)
 		p.GetErrorHandler().Sync(p)
-		_la = p.GetTokenStream().LA(1)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -1032,37 +1081,12 @@ func (s *MultiplicativeContext) GetOp() antlr.Token { return s.op }
 
 func (s *MultiplicativeContext) SetOp(v antlr.Token) { s.op = v }
 
-func (s *MultiplicativeContext) AllPrimary() []IPrimaryContext {
-	children := s.GetChildren()
-	len := 0
-	for _, ctx := range children {
-		if _, ok := ctx.(IPrimaryContext); ok {
-			len++
-		}
-	}
-
-	tst := make([]IPrimaryContext, len)
-	i := 0
-	for _, ctx := range children {
-		if t, ok := ctx.(IPrimaryContext); ok {
-			tst[i] = t.(IPrimaryContext)
-			i++
-		}
-	}
-
-	return tst
-}
-
-func (s *MultiplicativeContext) Primary(i int) IPrimaryContext {
+func (s *MultiplicativeContext) Primary() IPrimaryContext {
 	var t antlr.RuleContext
-	j := 0
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IPrimaryContext); ok {
-			if j == i {
-				t = ctx.(antlr.RuleContext)
-				break
-			}
-			j++
+			t = ctx.(antlr.RuleContext)
+			break
 		}
 	}
 
@@ -1073,20 +1097,28 @@ func (s *MultiplicativeContext) Primary(i int) IPrimaryContext {
 	return t.(IPrimaryContext)
 }
 
-func (s *MultiplicativeContext) AllStar() []antlr.TerminalNode {
-	return s.GetTokens(SimpleScriptParserStar)
+func (s *MultiplicativeContext) Multiplicative() IMultiplicativeContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IMultiplicativeContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IMultiplicativeContext)
 }
 
-func (s *MultiplicativeContext) Star(i int) antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserStar, i)
+func (s *MultiplicativeContext) Star() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserStar, 0)
 }
 
-func (s *MultiplicativeContext) AllSlash() []antlr.TerminalNode {
-	return s.GetTokens(SimpleScriptParserSlash)
-}
-
-func (s *MultiplicativeContext) Slash(i int) antlr.TerminalNode {
-	return s.GetToken(SimpleScriptParserSlash, i)
+func (s *MultiplicativeContext) Slash() antlr.TerminalNode {
+	return s.GetToken(SimpleScriptParserSlash, 0)
 }
 
 func (s *MultiplicativeContext) GetRuleContext() antlr.RuleContext {
@@ -1110,15 +1142,24 @@ func (s *MultiplicativeContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 func (p *SimpleScriptParser) Multiplicative() (localctx IMultiplicativeContext) {
+	return p.multiplicative(0)
+}
+
+func (p *SimpleScriptParser) multiplicative(_p int) (localctx IMultiplicativeContext) {
 	this := p
 	_ = this
 
-	localctx = NewMultiplicativeContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, SimpleScriptParserRULE_multiplicative)
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewMultiplicativeContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IMultiplicativeContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 12
+	p.EnterRecursionRule(localctx, 12, SimpleScriptParserRULE_multiplicative, _p)
 	var _la int
 
 	defer func() {
-		p.ExitRule()
+		p.UnrollRecursionContexts(_parentctx)
 	}()
 
 	defer func() {
@@ -1133,42 +1174,59 @@ func (p *SimpleScriptParser) Multiplicative() (localctx IMultiplicativeContext) 
 		}
 	}()
 
+	var _alt int
+
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(49)
+		p.SetState(55)
 		p.Primary()
 	}
-	p.SetState(54)
+
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(62)
 	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 
-	for _la == SimpleScriptParserStar || _la == SimpleScriptParserSlash {
-		{
-			p.SetState(50)
-
-			var _lt = p.GetTokenStream().LT(1)
-
-			localctx.(*MultiplicativeContext).op = _lt
-
-			_la = p.GetTokenStream().LA(1)
-
-			if !(_la == SimpleScriptParserStar || _la == SimpleScriptParserSlash) {
-				var _ri = p.GetErrorHandler().RecoverInline(p)
-
-				localctx.(*MultiplicativeContext).op = _ri
-			} else {
-				p.GetErrorHandler().ReportMatch(p)
-				p.Consume()
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
 			}
-		}
-		{
-			p.SetState(51)
-			p.Primary()
-		}
+			_prevctx = localctx
+			localctx = NewMultiplicativeContext(p, _parentctx, _parentState)
+			p.PushNewRecursionContext(localctx, _startState, SimpleScriptParserRULE_multiplicative)
+			p.SetState(57)
 
-		p.SetState(56)
+			if !(p.Precpred(p.GetParserRuleContext(), 1)) {
+				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
+			}
+			{
+				p.SetState(58)
+
+				var _lt = p.GetTokenStream().LT(1)
+
+				localctx.(*MultiplicativeContext).op = _lt
+
+				_la = p.GetTokenStream().LA(1)
+
+				if !(_la == SimpleScriptParserStar || _la == SimpleScriptParserSlash) {
+					var _ri = p.GetErrorHandler().RecoverInline(p)
+
+					localctx.(*MultiplicativeContext).op = _ri
+				} else {
+					p.GetErrorHandler().ReportMatch(p)
+					p.Consume()
+				}
+			}
+			{
+				p.SetState(59)
+				p.Primary()
+			}
+
+		}
+		p.SetState(64)
 		p.GetErrorHandler().Sync(p)
-		_la = p.GetTokenStream().LA(1)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -1269,7 +1327,7 @@ func (p *SimpleScriptParser) Primary() (localctx IPrimaryContext) {
 	_ = this
 
 	localctx = NewPrimaryContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, SimpleScriptParserRULE_primary)
+	p.EnterRule(localctx, 14, SimpleScriptParserRULE_primary)
 
 	defer func() {
 		p.ExitRule()
@@ -1287,36 +1345,36 @@ func (p *SimpleScriptParser) Primary() (localctx IPrimaryContext) {
 		}
 	}()
 
-	p.SetState(63)
+	p.SetState(71)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SimpleScriptParserIntegerLiteral:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(57)
+			p.SetState(65)
 			p.Match(SimpleScriptParserIntegerLiteral)
 		}
 
 	case SimpleScriptParserIdentifier:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(58)
+			p.SetState(66)
 			p.Match(SimpleScriptParserIdentifier)
 		}
 
 	case SimpleScriptParserLeftParen:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(59)
+			p.SetState(67)
 			p.Match(SimpleScriptParserLeftParen)
 		}
 		{
-			p.SetState(60)
+			p.SetState(68)
 			p.Expression()
 		}
 		{
-			p.SetState(61)
+			p.SetState(69)
 			p.Match(SimpleScriptParserRightParen)
 		}
 
@@ -1325,4 +1383,51 @@ func (p *SimpleScriptParser) Primary() (localctx IPrimaryContext) {
 	}
 
 	return localctx
+}
+
+func (p *SimpleScriptParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
+	switch ruleIndex {
+	case 5:
+		var t *AdditiveContext = nil
+		if localctx != nil {
+			t = localctx.(*AdditiveContext)
+		}
+		return p.Additive_Sempred(t, predIndex)
+
+	case 6:
+		var t *MultiplicativeContext = nil
+		if localctx != nil {
+			t = localctx.(*MultiplicativeContext)
+		}
+		return p.Multiplicative_Sempred(t, predIndex)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(ruleIndex))
+	}
+}
+
+func (p *SimpleScriptParser) Additive_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	this := p
+	_ = this
+
+	switch predIndex {
+	case 0:
+		return p.Precpred(p.GetParserRuleContext(), 1)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
+}
+
+func (p *SimpleScriptParser) Multiplicative_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	this := p
+	_ = this
+
+	switch predIndex {
+	case 1:
+		return p.Precpred(p.GetParserRuleContext(), 1)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
 }

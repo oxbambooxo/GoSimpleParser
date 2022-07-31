@@ -75,7 +75,7 @@ func (evaluator *Evaluator) peek() int64 {
 func (evaluator *Evaluator) getVariable(variableName string) int64 {
 	value, exist := evaluator.local[variableName]
 	if !exist {
-		panic("unknown variable " + variableName)
+		panic("undefined variable " + variableName)
 	}
 	return value.(int64)
 }

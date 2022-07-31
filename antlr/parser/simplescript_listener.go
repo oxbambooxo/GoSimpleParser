@@ -11,6 +11,9 @@ type SimpleScriptListener interface {
 	// EnterProgramm is called when entering the programm production.
 	EnterProgramm(c *ProgrammContext)
 
+	// EnterStatement is called when entering the statement production.
+	EnterStatement(c *StatementContext)
+
 	// EnterIntDeclaration is called when entering the intDeclaration production.
 	EnterIntDeclaration(c *IntDeclarationContext)
 
@@ -31,6 +34,9 @@ type SimpleScriptListener interface {
 
 	// ExitProgramm is called when exiting the programm production.
 	ExitProgramm(c *ProgrammContext)
+
+	// ExitStatement is called when exiting the statement production.
+	ExitStatement(c *StatementContext)
 
 	// ExitIntDeclaration is called when exiting the intDeclaration production.
 	ExitIntDeclaration(c *IntDeclarationContext)

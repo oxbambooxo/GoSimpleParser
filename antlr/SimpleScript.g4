@@ -3,16 +3,41 @@ grammar SimpleScript;
 import SimpleLexer;
 
 
-programm: (intDeclaration | assignment | expression)+;
+programm
+    : statement
+    | (statement ';')+
+    ;
 
-intDeclaration: Int Identifier (AssignmentOP additive)? SemiColon?;
+statement
+    : intDeclaration
+    | assignment
+    | expression
+    ;
 
-assignment: Identifier AssignmentOP additive SemiColon?;
+intDeclaration
+    : 'int' Identifier ('=' additive)?
+    ;
 
-expression: additive SemiColon?;
+assignment
+    : Identifier '=' additive
+    ;
 
-additive: multiplicative (op=(Plus | Minus) multiplicative)*;
+expression
+    : additive
+    ;
 
-multiplicative: primary (op=(Star | Slash) primary)*;
+additive
+    : multiplicative
+    | additive op=('+' | '-') multiplicative
+    ;
 
-primary: IntegerLiteral | Identifier | LeftParen expression RightParen;
+multiplicative
+    : primary
+    | multiplicative op=('*' | '/') primary
+    ;
+
+primary
+    : IntegerLiteral
+    | Identifier
+    | '(' expression ')'
+    ;

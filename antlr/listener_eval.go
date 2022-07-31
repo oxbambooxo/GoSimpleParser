@@ -8,31 +8,8 @@ import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
-func (evaluator *Evaluator) VisitTerminal(node antlr.TerminalNode) {
-}
-
-func (evaluator *Evaluator) VisitErrorNode(node antlr.ErrorNode) {
-}
-
 func (evaluator *Evaluator) EnterEveryRule(ctx antlr.ParserRuleContext) {
-}
-
-func (evaluator *Evaluator) ExitEveryRule(ctx antlr.ParserRuleContext) {
-}
-
-func (evaluator *Evaluator) EnterProgramm(ctx *parser.ProgrammContext) {
-}
-
-func (evaluator *Evaluator) ExitProgramm(ctx *parser.ProgrammContext) {
-}
-
-func (evaluator *Evaluator) EnterExpression(ctx *parser.ExpressionContext) {
-}
-
-func (evaluator *Evaluator) ExitExpression(ctx *parser.ExpressionContext) {
-}
-
-func (evaluator *Evaluator) EnterIntDeclaration(ctx *parser.IntDeclarationContext) {
+	// fmt.Printf("%#v\n", ctx)
 }
 
 func (evaluator *Evaluator) ExitIntDeclaration(ctx *parser.IntDeclarationContext) {
@@ -46,17 +23,11 @@ func (evaluator *Evaluator) ExitIntDeclaration(ctx *parser.IntDeclarationContext
 	evaluator.local[variableName] = variableValue
 }
 
-func (evaluator *Evaluator) EnterAssignment(ctx *parser.AssignmentContext) {
-}
-
 func (evaluator *Evaluator) ExitAssignment(ctx *parser.AssignmentContext) {
 	variableName := ctx.Identifier().GetText()
 	evaluator.getVariable(variableName)
 	variableValue := evaluator.peek()
 	evaluator.local[variableName] = variableValue
-}
-
-func (evaluator *Evaluator) EnterAdditive(ctx *parser.AdditiveContext) {
 }
 
 func (evaluator *Evaluator) ExitAdditive(ctx *parser.AdditiveContext) {
@@ -75,9 +46,6 @@ func (evaluator *Evaluator) ExitAdditive(ctx *parser.AdditiveContext) {
 	}
 }
 
-func (evaluator *Evaluator) EnterMultiplicative(ctx *parser.MultiplicativeContext) {
-}
-
 func (evaluator *Evaluator) ExitMultiplicative(ctx *parser.MultiplicativeContext) {
 	if ctx.GetOp() == nil {
 		return
@@ -92,9 +60,6 @@ func (evaluator *Evaluator) ExitMultiplicative(ctx *parser.MultiplicativeContext
 	default:
 		panic(fmt.Sprintf("unexpected op: %s", ctx.GetOp().GetText()))
 	}
-}
-
-func (evaluator *Evaluator) EnterPrimary(ctx *parser.PrimaryContext) {
 }
 
 func (evaluator *Evaluator) ExitPrimary(ctx *parser.PrimaryContext) {

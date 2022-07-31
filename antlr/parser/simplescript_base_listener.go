@@ -27,6 +27,12 @@ func (s *BaseSimpleScriptListener) EnterProgramm(ctx *ProgrammContext) {}
 // ExitProgramm is called when production programm is exited.
 func (s *BaseSimpleScriptListener) ExitProgramm(ctx *ProgrammContext) {}
 
+// EnterStatement is called when production statement is entered.
+func (s *BaseSimpleScriptListener) EnterStatement(ctx *StatementContext) {}
+
+// ExitStatement is called when production statement is exited.
+func (s *BaseSimpleScriptListener) ExitStatement(ctx *StatementContext) {}
+
 // EnterIntDeclaration is called when production intDeclaration is entered.
 func (s *BaseSimpleScriptListener) EnterIntDeclaration(ctx *IntDeclarationContext) {}
 
